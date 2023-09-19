@@ -1,57 +1,51 @@
+import 'package:bookly/Features/search/presentation/manger/search_cubit/search_cubit.dart';
+import 'package:bookly/Features/search/presentation/views/widgets/search_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/styles.dart';
-import '../../../../home/presention/views/widgets/best_seller_list_view_item.dart';
 import 'custom_search_text_field.dart';
 
-class SearchViewBody extends StatelessWidget {
+class SearchViewBody extends StatefulWidget {
   const SearchViewBody({super.key});
 
   @override
+  State<SearchViewBody> createState() => _SearchViewBodyState();
+}
+
+class _SearchViewBodyState extends State<SearchViewBody> {
+  @override
+  void initState() {
+    BlocProvider.of<SearchCubit>(context).fetchBooks();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.0),
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           CustomSearchTextField(),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               "Search Result",
               style: Styles.textStyle18,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          Expanded(child: SearchResultListView()),
+          const Expanded(
+            child: SearchResultListView(),
+          ),
         ],
       ),
-    );
-  }
-}
-
-class SearchResultListView extends StatelessWidget {
-  const SearchResultListView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 15.0),
-          //child: BookListViewItem(),
-          child: Text("data"),
-        );
-      },
     );
   }
 }

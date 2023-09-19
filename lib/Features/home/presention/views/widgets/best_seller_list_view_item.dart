@@ -10,7 +10,6 @@ import 'book_rating.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({super.key, required this.book});
-
   final BookModel book;
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class BookListViewItem extends StatelessWidget {
                 SizedBox(
                   width: width / 1.8,
                   child: Text(
-                    book.volumeInfo.title!,
+                    book.volumeInfo.title ?? "without name",
                     maxLines: 2,
                     style: Styles.textStyle20.copyWith(
                       fontFamily: kGtSectraFine,
@@ -52,7 +51,7 @@ class BookListViewItem extends StatelessWidget {
                 SizedBox(
                   width: width / 1.8,
                   child: Text(
-                    book.volumeInfo.authors![0],
+                    book.volumeInfo.authors?[0] ?? "unknown",
                     maxLines: 1,
                     style: Styles.textStyle14,
                     overflow: TextOverflow.ellipsis,
